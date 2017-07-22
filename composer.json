@@ -1,5 +1,5 @@
 {
-    "name": "jisoft/yii2-sypexgeo",
+    "name": "den67rus/yii2-sypexgeo",
     "description": "Yii2 extension for Sypex Geo API (http://sypexgeo.net)",
     "type": "yii2-extension",
     "keywords": ["yii2","sypexgeo","geo","geolocation","geoip"],
@@ -17,6 +17,10 @@
         {
             "name": "jisoft",
             "email": "jisoft.dn@gmail.com"
+        },
+        {
+            "name": "den67rus",
+            "email": "den67rus@gmail.com"
         }
     ],
     "require": {

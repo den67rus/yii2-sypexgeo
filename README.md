@@ -71,6 +71,41 @@ City
 
 ```
 
+Update SypexGeo
+-----
+
+For updates SypexGeo add the given code in cron
+
+```php
+<?php
+    $geo = new \jisoft\sypexgeo\SxUpdate();
+    
+    // Custom dir dat files
+    // by default Yii::getAlias('@runtime'); or __DIR__ if not Yii Framework
+    $geo->updateDir = '/tmp';
+    
+    // Custom url update
+    $geo->cityUrl = 'http://example.com/file.zip';
+    $geo->countryUrl = 'http://example.com/file.zip';
+    $geo->maxUrl = 'http://example.com/file.zip'; // Be sure to specify the url
+
+
+    // Update Sypex Geo City file
+    $geo->updateCity();
+    
+    // Update Sypex Geo Country file
+    $geo->updateCountry();
+    
+    // Update Sypex Geo Max file
+    // Be sure to specify the url $geo->maxUrl
+    $geo->updateMax();
+    
+    // Update Sypex Geo all file
+    // Be sure to specify the url $geo->maxUrl
+    $geo->updateAll();
+?>
+```
+
 Installation
 ------------
 
@@ -79,13 +114,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist jisoft/yii2-sypexgeo "*"
+composer require den67rus/yii2-sypexgeo "~1.0.0"
 ```
 
 or add
 
 ```
-"jisoft/yii2-sypexgeo": "*"
+"den67rus/yii2-sypexgeo": "*"
 ```
 
 to the require section of your `composer.json` file.

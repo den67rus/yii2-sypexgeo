@@ -16,7 +16,7 @@ namespace jisoft\sypexgeo;
 class Sypexgeo
 {
     /**
-     * @var \SxGeo instance.
+     * @var SxGeo instance.
      */
     private $_sypex = null;
 
@@ -42,9 +42,77 @@ class Sypexgeo
     public $country = [];
 
     /**
+     * @var string dir dat files
+     */
+    protected $dataDir;
+    /**
+     * @var string dat filename
+     */
+    protected $datFile = 'SxGeo.dat';
+
+    /**
+     * @var string SxGeo type
+     */
+    public $sxGeoType;
+
+    /**
+     * Sypexgeo constructor.
+     */
+    public function __construct()
+    {
+        if (class_exists('\Yii')) {
+            $this->dataDir = \Yii::getAlias('@runtime') . '/sx_data';
+        } else {
+            $this->dataDir = __DIR__ . '/sx_data';
+        }
+        $this->sxGeoType = SxGeo::SXGEO_FILE;
+    }
+
+    /**
+     * Installs a folder with the files SypexGeo
+     * @param $dir
+     * @return $this
+     */
+    public function setDataDir($dir)
+    {
+        $this->dataDir = $dir . '/sx_data';
+        return $this;
+    }
+
+    /**
+     * Include file SxGeo
+     * @return $this
+     */
+    public function setCountry()
+    {
+        $this->datFile = 'SxGeo.dat';
+        return $this;
+    }
+
+    /**
+     * Include file SxGeoCity
+     * @return $this
+     */
+    public function setCity()
+    {
+        $this->datFile = 'SxGeoCity.dat';
+        return $this;
+    }
+
+    /**
+     * Include file SxGeoMax
+     * @return $this
+     */
+    public function setMax()
+    {
+        $this->datFile = 'SxGeoMax.dat';
+        return $this;
+    }
+
+    /**
      * Get full geo info by remote IP-address
      * @param string $ip source ip, if empty then determine
-     * @return array geo info|false if error
+     * @return array|bool geo info|false if error
      * result array example:
      *  ```php
      *    [
@@ -79,7 +147,7 @@ class Sypexgeo
      *   ]
      *  ```
      */
-    public function get($ip='')
+    public function get($ip = '')
     {
         if (empty($ip))
             $this->getIP();
@@ -126,7 +194,7 @@ class Sypexgeo
     }
 
     /**
-     * @return \SxGeo instance.
+     * @return SxGeo instance.
      */
     public function getSypexGeo()
     {
@@ -139,11 +207,10 @@ class Sypexgeo
 
     /**
      * Creates SxGeo instance.
-     * @return \SxGeo instance.
+     * @return SxGeo instance.
      */
     protected function createSxGeo()
     {
-        return new \jisoft\sypexgeo\SxGeo();
+        return new SxGeo($this->dataDir . '/' . $this->datFile, $this->sxGeoType);
     }
-
 }
